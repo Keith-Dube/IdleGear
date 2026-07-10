@@ -1,0 +1,43 @@
+{
+  "name": "gearshare",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GearShare equipment rental marketplace MVP monorepo.",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "overrides": {
+    "@nestjs/common": "11.1.28",
+    "@nestjs/core": "11.1.28",
+    "file-type": "21.3.4",
+    "picomatch": "^4.0.4",
+    "postcss": "8.5.16"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:frontend dev:backend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "dev:backend": "npm run start:dev --workspace backend",
+    "build": "npm run build --workspace shared && npm run build --workspace backend && npm run build --workspace frontend",
+    "lint": "npm run lint --workspace frontend && npm run lint --workspace backend && npm run lint --workspace shared",
+    "typecheck": "npm run typecheck --workspace shared && npm run typecheck --workspace backend && npm run typecheck --workspace frontend",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prisma:generate": "npm --workspace backend run prisma:generate",
+    "prisma:migrate:dev": "npm --workspace backend run prisma:migrate:dev --",
+    "prisma:seed": "npm --workspace backend run prisma:seed",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down --remove-orphans"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.19.0"
+  }
+}
